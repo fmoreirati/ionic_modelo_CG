@@ -7,6 +7,8 @@
 <ion-content>
 
   <ion-item>
+    <ion-searchbar showCancelButton="focus" placeholder="Busca de produtos" (ionChange)="busca()" [(ngModel)]="dados">
+    </ion-searchbar>
     <ion-label>Lista</ion-label>
     <ion-toggle (ngModel)="lista" (click)="lista = !lista"></ion-toggle>
   </ion-item>

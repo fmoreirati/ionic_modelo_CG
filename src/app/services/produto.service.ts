@@ -52,4 +52,13 @@ export class ProdutoService {
     //return this.firedb.collection("produtos").doc(id).remove();
   }
 
+  find(data: string) {
+    return this.firedb.collection<Produto>("produtos", ref => ref.where('ativo','==', true).orderBy('nome').startAt(data).endAt(data + '\uf8ff')).snapshotChanges()
+      .pipe(
+        map(dados =>
+          dados.map(d => ({ key: d.payload.doc.id, ...d.payload.doc.data() }))
+          //dados.map(d => ({ key: d.payload.key, ...d.payload.val() }))
+        )
+      )
+  }
 }

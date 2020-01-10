@@ -11,7 +11,8 @@ import { MensagemService } from 'src/app/services/mensagem.service';
 export class ListProdutoPage implements OnInit {
 
   protected produtos: Produto[];
-  protected lista: boolean = false
+  protected lista: boolean = false;
+  protected dados: string = "";
 
   constructor(
     private produtoService: ProdutoService,
@@ -49,5 +50,15 @@ export class ListProdutoPage implements OnInit {
       ]
     })
     await alert.present()
+  }
+
+  async busca() {
+    console.log(this.dados);
+    await this.produtoService.find(this.dados).subscribe(
+      res => {
+        this.produtos = res;
+        console.log(res);
+      }
+    )
   }
 }
